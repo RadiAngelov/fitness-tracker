@@ -1,0 +1,40 @@
+.workout-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+  }
+  
+  .workout-form label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .workout-form input,
+  .workout-form select,
+  .workout-form textarea {
+    margin-top: 5px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .workout-form button {
+    margin-top: 15px;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .workout-form button:hover {
+    background: #218838;
+  }
+  
