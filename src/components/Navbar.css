@@ -1,0 +1,61 @@
+/* Основни стилове */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+  }
+  
+  .brand {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  /* Стилове за навигационните линкове */
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  /* Скрита навигация за мобилни */
+  .hamburger {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Респонсив стилове за мобилни устройства */
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+    }
+  
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: #333;
+      padding: 10px 0;
+      text-align: center;
+    }
+  
+    .nav-links.open {
+      display: flex;
+    }
+  }
+  
