@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": "192a",
+      "email": "test@example.com",
+      "password": "123",
+      "goal": {
+        "value": 10,
+        "unit": "км",
+        "type": "distance"
+      }
+    }
+  ],
+  "workouts": []
+}

@@ -1,0 +1,121 @@
+.workout-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Контейнер за всяко поле (етикет + поле) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+  outline: none;
+}
+
+.form-group textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+/* Основен бутон */
+.workout-form button {
+  width: 100%;
+  padding: 14px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.workout-form button:hover {
+  background-color: #43a047;
+  transform: scale(1.02);
+}
+
+/* Контейнер за допълнителни бутони */
+.form-buttons {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.form-buttons button {
+  flex: 1;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-buttons .danger {
+  background-color: #e53935;
+  color: white;
+}
+
+.form-buttons .danger:hover {
+  background-color: #c62828;
+}
+
+.form-buttons button:hover {
+  opacity: 0.9;
+}
+
+/* Мобилна адаптация */
+@media (max-width: 768px) {
+  .workout-form {
+    max-width: 90%;
+    padding: 24px;
+  }
+}
+
+/* Анимация при зареждане */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

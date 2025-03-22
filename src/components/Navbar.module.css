@@ -59,3 +59,14 @@
     }
   }
   
+  .logout-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+
+  
