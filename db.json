@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": "192a",
+      "id": "f4c0",
       "email": "test@example.com",
       "password": "123",
       "goal": {
@@ -11,5 +11,24 @@
       }
     }
   ],
-  "workouts": []
+  "workouts": [
+    {
+      "id": "e8a0",
+      "date": "2025-03-12",
+      "distance": 100,
+      "duration": 100,
+      "intensity": "medium",
+      "comments": "",
+      "userId": "f4c0"
+    },
+    {
+      "id": "ac2c",
+      "date": "2025-02-26",
+      "distance": 40,
+      "duration": 60,
+      "intensity": "medium",
+      "comments": "",
+      "userId": "f4c0"
+    }
+  ]
 }

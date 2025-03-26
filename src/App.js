@@ -5,10 +5,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Workouts from './pages/Workouts';
 import Stats from './pages/Stats';
+import Home from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
 import './App.css';
-
-const Home = () => <h1>🏠 Welcome to Fitness Tracker</h1>;
 
 function App() {
   const [user, setUser] = useState(() => {

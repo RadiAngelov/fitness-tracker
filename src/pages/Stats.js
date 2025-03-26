@@ -9,13 +9,17 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import styles from '../pages/Stats.module.css';
+import GoalEditor from '../components/GoalEditor';
 
 const Stats = ({ user }) => {
   const [workouts, setWorkouts] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState(null); // null = всички
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [localUser, setLocalUser] = useState(user);
 
   useEffect(() => {
     if (!user) return;
+
+    setLocalUser(user);
 
     fetch("http://localhost:5001/workouts")
       .then(res => res.json())
@@ -73,6 +77,10 @@ const Stats = ({ user }) => {
     intensity: workout.intensity,
   }));
 
+  const monthlyGoal = localUser?.goal?.value || 0;
+  const rawProgress = (totalDistance / monthlyGoal) * 100;
+  const monthlyProgress = Math.min(rawProgress, 100);
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>📊 Статистики</h1>
@@ -104,7 +112,6 @@ const Stats = ({ user }) => {
         </select>
       </div>
 
-      {/* Ако няма тренировки за месеца */}
       {filteredWorkouts.length === 0 ? (
         <p className={styles.warning}>📅 Няма тренировки за избрания месец.</p>
       ) : (
@@ -119,6 +126,28 @@ const Stats = ({ user }) => {
             <p>Общ брой тренировки: <strong>{totalWorkouts}</strong></p>
             <p>Най-дълга тренировка: <strong>{longestWorkout.duration} мин / {longestWorkout.distance} км</strong></p>
             <p>Най-често срещана интензивност: <strong>{intensityLabel}</strong></p>
+          </div>
+
+          {/* 🎯 Месечна цел и прогрес */}
+          <div className={styles.summary}>
+            <GoalEditor
+              user={localUser}
+              onGoalUpdate={(updatedGoal) =>
+                setLocalUser({ ...localUser, goal: updatedGoal })
+              }
+            />
+            <div className={styles.progressBar}>
+              <div
+                className={styles.progressFill}
+                style={{ width: `${monthlyProgress}%` }}
+              ></div>
+            </div>
+            <p>{monthlyProgress.toFixed(1)}% изпълнение</p>
+            {rawProgress > 100 && (
+              <p className={styles.success}>
+                ✅ Целта е изпълнена! С {Math.floor(rawProgress - 100)}% над нея!
+              </p>
+            )}
           </div>
 
           <h2 className={styles.subtitle}>🔍 Топ 3 Тренировки</h2>
