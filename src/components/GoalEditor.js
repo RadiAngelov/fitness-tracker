@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './GoalEditor.module.css';
-import {Target} from 'lucide-react';
+import { Target } from 'lucide-react';
 
 
 const GoalEditor = ({ user, onGoalUpdate }) => {
@@ -35,7 +35,7 @@ const GoalEditor = ({ user, onGoalUpdate }) => {
 
   return (
     <div className={styles.goalEditor}>
-      <h3><Target size={24} className={styles.icon}/> Месечна цел</h3>
+      <h3><Target size={24} className={styles.icon} /> Месечна цел</h3>
       {isEditing ? (
         <>
           <label>Нова цел (в км):</label>

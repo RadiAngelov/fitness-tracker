@@ -124,8 +124,8 @@ const Register = () => {
         </div>
 
         <button type="submit" className={styles['register-btn']}>
-  Регистрирай се
-</button>
+          Регистрирай се
+        </button>
 
       </form>
     </div>

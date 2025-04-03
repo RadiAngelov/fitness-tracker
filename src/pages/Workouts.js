@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import WorkoutForm from '../components/WorkoutForm';
 import styles from '../pages/Workouts.module.css';
 import {
-  Calendar,Activity,Clock,Flame,Sun,Zap,Edit3,MessageSquare,Dumbbell
+  Calendar, Activity, Clock, Flame, Sun, Zap, Edit3, MessageSquare, Dumbbell
 } from 'lucide-react';
 
 
@@ -13,7 +13,7 @@ const Workouts = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) return;
-  
+
     fetch("http://localhost:5001/workouts")
       .then(res => res.json())
       .then(data => {
@@ -23,12 +23,12 @@ const Workouts = () => {
         setWorkouts(userWorkouts);
       })
       .catch(err => console.error("Грешка при зареждане на тренировките:", err));
-  }, []);  
+  }, []);
 
   const addWorkout = (newWorkout) => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) return;
-  
+
     fetch("http://localhost:5001/workouts", {
       method: "POST",
       headers: {
@@ -43,7 +43,7 @@ const Workouts = () => {
       })
       .catch(err => console.error("Грешка при добавяне на тренировка:", err));
   };
-  
+
 
   const deleteWorkout = (id) => {
     fetch(`http://localhost:5001/workouts/${id}`, {
@@ -59,7 +59,7 @@ const Workouts = () => {
   const updateWorkout = (id, updatedWorkout) => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) return;
-  
+
     fetch(`http://localhost:5001/workouts/${id}`, {
       method: 'PUT',
       headers: {
@@ -79,7 +79,7 @@ const Workouts = () => {
       })
       .catch(err => console.error("Грешка при редактиране:", err));
   };
-  
+
 
   const convertIntensity = (level) => {
     switch (level) {
@@ -120,15 +120,15 @@ const Workouts = () => {
             </span>
             {selectedWorkout?.id === workout.id && (
               <span className={styles["edit-icon"]}>
-              <Edit3 size={16} />
+                <Edit3 size={16} />
               </span>
             )}
             {workout.comments && (
-  <span className={styles.comment}>
-    <MessageSquare size={16} className={styles.icon} />
-    {workout.comments}
-  </span>
-)}
+              <span className={styles.comment}>
+                <MessageSquare size={16} className={styles.icon} />
+                {workout.comments}
+              </span>
+            )}
           </li>
         ))}
       </ul>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
-  LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,ResponsiveContainer
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import styles from '../pages/Stats.module.css';
 import GoalEditor from '../components/GoalEditor';
 import {
-  BarChart2,LineChartIcon,Search,Clock,Activity,Flame,Sun,Zap,Target,Calendar,CheckCircle
+  BarChart2, LineChartIcon, Search, Clock, Activity, Flame, Sun, Zap, Target, Calendar, CheckCircle
 } from 'lucide-react';
 
 
@@ -17,10 +17,10 @@ const Stats = ({ user, setUser }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (!storedUser) return;
-  
+
     const parsedUser = JSON.parse(storedUser);
     setLocalUser(parsedUser);
-  
+
     fetch("http://localhost:5001/workouts")
       .then(res => res.json())
       .then(data => {
@@ -30,7 +30,7 @@ const Stats = ({ user, setUser }) => {
         setWorkouts(filtered);
       })
       .catch(err => console.error("Грешка при зареждане на тренировките:", err));
-  }, [user]); 
+  }, [user]);
 
   if (!workouts || workouts.length === 0) {
     return <h2 className={styles.container}><BarChart2 size={24} className={styles.icon} /> Няма налични тренировки за статистика.</h2>;
@@ -39,8 +39,8 @@ const Stats = ({ user, setUser }) => {
   const filteredWorkouts = selectedMonth === null
     ? workouts
     : workouts.filter(w =>
-        new Date(w.date).getMonth() === selectedMonth
-      );
+      new Date(w.date).getMonth() === selectedMonth
+    );
 
   const totalDistance = filteredWorkouts.reduce((sum, workout) => sum + parseFloat(workout.distance), 0);
   const totalDuration = filteredWorkouts.reduce((sum, workout) => sum + parseFloat(workout.duration), 0);
@@ -68,8 +68,8 @@ const Stats = ({ user, setUser }) => {
     parseFloat(w.distance) > parseFloat(max.distance) ? w : max, filteredWorkouts[0]);
 
   const mostIntenseWorkout = filteredWorkouts.find(w => w.intensity === 'extreme') ||
-                             filteredWorkouts.find(w => w.intensity === 'medium') ||
-                             filteredWorkouts.find(w => w.intensity === 'light');
+    filteredWorkouts.find(w => w.intensity === 'medium') ||
+    filteredWorkouts.find(w => w.intensity === 'light');
 
   const chartData = filteredWorkouts.map(workout => ({
     date: workout.date,
@@ -112,7 +112,7 @@ const Stats = ({ user, setUser }) => {
       </div>
 
       {filteredWorkouts.length === 0 ? (
-        <p className={styles.warning}><Calendar size={24} className={styles.icon}/> Няма тренировки за избрания месец.</p>
+        <p className={styles.warning}><Calendar size={24} className={styles.icon} /> Няма тренировки за избрания месец.</p>
       ) : (
         <>
           <div className={styles.summary}>
@@ -134,7 +134,7 @@ const Stats = ({ user, setUser }) => {
                 const updatedUser = { ...localUser, goal: updatedGoal };
                 setLocalUser(updatedUser);
                 setUser(updatedUser);
-                localStorage.setItem("user", JSON.stringify(updatedUser));             
+                localStorage.setItem("user", JSON.stringify(updatedUser));
               }}
             />
             <div className={styles.progressBar}>
