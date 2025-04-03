@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": "f4c0",
+      "id": "1e8e",
       "email": "test@example.com",
       "password": "testpassword",
       "goal": {
@@ -13,13 +13,13 @@
   ],
   "workouts": [
     {
+      "id": "4edb",
       "date": "2025-04-03",
       "distance": 111,
-      "duration": 120,
-      "intensity": "medium",
-      "comments": "Kоментар който се визуализира",
-      "userId": "f4c0",
-      "id": "e8a0"
+      "duration": 240,
+      "intensity": "extreme",
+      "comments": "Коментар за визуализация",
+      "userId": "1e8e"
     }
   ]
 }
