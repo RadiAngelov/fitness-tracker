@@ -3,9 +3,9 @@
     {
       "id": "f4c0",
       "email": "test@example.com",
-      "password": "123",
+      "password": "testpassword",
       "goal": {
-        "value": 30,
+        "value": 100,
         "unit": "км",
         "type": "distance"
       }
@@ -13,11 +13,11 @@
   ],
   "workouts": [
     {
-      "date": "2025-03-12",
-      "distance": 100,
-      "duration": 100,
-      "intensity": "extreme",
-      "comments": "Това е коментар който се визуализира",
+      "date": "2025-04-03",
+      "distance": 111,
+      "duration": 120,
+      "intensity": "medium",
+      "comments": "Kоментар който се визуализира",
       "userId": "f4c0",
       "id": "e8a0"
     }
