@@ -85,7 +85,6 @@ const Stats = ({ user, setUser }) => {
     <div className={styles.container}>
       <h1 className={styles.title}><BarChart2 size={24} className={styles.icon} /> Статистики</h1>
 
-      {/* Филтър по месец */}
       <div className={styles.summary}>
         <label htmlFor="month">Филтрирай по месец: </label>
         <select
@@ -128,7 +127,6 @@ const Stats = ({ user, setUser }) => {
             <p>Най-често срещана интензивност: <strong>{intensityLabel}</strong></p>
           </div>
 
-          {/*  Месечна цел и прогрес */}
           <div className={styles.summary}>
             <GoalEditor
               user={localUser}

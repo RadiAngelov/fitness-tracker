@@ -26,7 +26,7 @@ useEffect(() => {
       return res.json();
     })
     .then(() => {
-      setUser(parsed); // потребителят е валиден
+      setUser(parsed);
     })
     .catch((err) => {
       console.error("Невалидна сесия:", err);

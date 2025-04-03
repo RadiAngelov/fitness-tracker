@@ -7,7 +7,6 @@ const GoalTracker = ({ userId }) => {
   const [distanceSoFar, setDistanceSoFar] = useState(0);
 
   useEffect(() => {
-    // Взимаме целта
     axios.get(`http://localhost:3000/users/${userId}`).then((res) => {
       const userGoal = res.data.goal;
       if (userGoal) {
@@ -15,7 +14,6 @@ const GoalTracker = ({ userId }) => {
       }
     });
 
-    // Взимаме тренировките и изчисляваме текущото разстояние
     axios.get(`http://localhost:3000/workouts?userId=${userId}`).then((res) => {
       const totalDistance = res.data.reduce(
         (sum, workout) => sum + (workout.distance || 0),
