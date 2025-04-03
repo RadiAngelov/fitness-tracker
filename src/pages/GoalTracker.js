@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {Target} from 'lucide-react';
 
 const GoalTracker = ({ userId }) => {
   const [goal, setGoal] = useState(0);
@@ -39,7 +40,7 @@ const GoalTracker = ({ userId }) => {
 
   return (
     <div className="p-4 border rounded-md shadow-md max-w-md bg-white">
-      <h2 className="text-xl font-semibold mb-2">🎯 Цел за месеца</h2>
+      <h2 className="text-xl font-semibold mb-2"><Target size={24} className={styles.icon}/> Цел за месеца</h2>
       <input
         type="number"
         className="border p-2 w-full mb-2"

@@ -7,13 +7,34 @@ import Workouts from './pages/Workouts';
 import Stats from './pages/Stats';
 import Home from './pages/Home';
 import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 import './App.css';
 
+
 function App() {
-  const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem("user");
-    return saved ? JSON.parse(saved) : null;
-  });
+  const [user, setUser] = useState(null);
+
+useEffect(() => {
+  const saved = localStorage.getItem("user");
+  if (!saved) return;
+
+  const parsed = JSON.parse(saved);
+
+  fetch(`http://localhost:5001/users/${parsed.id}`)
+    .then(res => {
+      if (!res.ok) throw new Error("Потребителят не съществува");
+      return res.json();
+    })
+    .then(() => {
+      setUser(parsed); // потребителят е валиден
+    })
+    .catch((err) => {
+      console.error("Невалидна сесия:", err);
+      localStorage.removeItem("user");
+      setUser(null);
+    });
+}, []);
+
 
   const [workouts, setWorkouts] = useState([]);
 
@@ -35,21 +56,33 @@ function App() {
     <div>
       <Navbar user={user} setUser={setUser} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
-        <Route path="/register" element={<Register setUser={setUser} />} />
+      <Route path="/" element={<Home user={user} />} />
+      <Route path="/login" element={
+  <PublicRoute>
+    <Login setUser={setUser} />
+  </PublicRoute>
+} />
+<Route path="/register" element={
+  <PublicRoute>
+    <Register setUser={setUser} />
+  </PublicRoute>
+} />
 
-        <Route path="/workouts" element={
-          <PrivateRoute user={user}>
-            <Workouts user={user} />
-          </PrivateRoute>
-        } />
 
-        <Route path="/stats" element={
-          <PrivateRoute user={user}>
-            <Stats user={user} workouts={workouts} />
-          </PrivateRoute>
-        } />
+<Route path="/workouts" element={
+  <PrivateRoute user={user} setUser={setUser}>
+    <Workouts user={user} />
+  </PrivateRoute>
+} />
+
+
+<Route path="/stats" element={
+  <PrivateRoute user={user} setUser={setUser}>
+    <Stats user={user} setUser={setUser} workouts={workouts} />
+  </PrivateRoute>
+} />
+
+
       </Routes>
     </div>
   );

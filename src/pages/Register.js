@@ -108,7 +108,6 @@ const Register = () => {
           />
         </div>
 
-        {/* 🎯 Поле за цел */}
         <div className={styles['form-group']}>
           <label htmlFor="goalValue">Цел за разстояние (в километри):</label>
           <input

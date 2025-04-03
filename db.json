@@ -5,7 +5,7 @@
       "email": "test@example.com",
       "password": "123",
       "goal": {
-        "value": 10,
+        "value": 30,
         "unit": "км",
         "type": "distance"
       }
@@ -13,22 +13,13 @@
   ],
   "workouts": [
     {
-      "id": "e8a0",
       "date": "2025-03-12",
       "distance": 100,
       "duration": 100,
-      "intensity": "medium",
-      "comments": "",
-      "userId": "f4c0"
-    },
-    {
-      "id": "ac2c",
-      "date": "2025-02-26",
-      "distance": 40,
-      "duration": 60,
-      "intensity": "medium",
-      "comments": "",
-      "userId": "f4c0"
+      "intensity": "extreme",
+      "comments": "Това е коментар който се визуализира",
+      "userId": "f4c0",
+      "id": "e8a0"
     }
   ]
 }

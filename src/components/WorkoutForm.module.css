@@ -9,7 +9,7 @@
   animation: fadeIn 0.4s ease-in-out;
 }
 
-/* Контейнер за всяко поле (етикет + поле) */
+
 .form-group {
   display: flex;
   flex-direction: column;
@@ -47,7 +47,7 @@
   min-height: 80px;
 }
 
-/* Основен бутон */
+
 .workout-form button {
   width: 100%;
   padding: 14px;
@@ -66,7 +66,7 @@
   transform: scale(1.02);
 }
 
-/* Контейнер за допълнителни бутони */
+
 .form-buttons {
   margin-top: 12px;
   display: flex;
@@ -96,15 +96,7 @@
   opacity: 0.9;
 }
 
-/* Мобилна адаптация */
-@media (max-width: 768px) {
-  .workout-form {
-    max-width: 90%;
-    padding: 24px;
-  }
-}
 
-/* Анимация при зареждане */
 .fade-in {
   animation: fadeIn 0.4s ease-in-out;
 }
@@ -117,5 +109,13 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .workout-form {
+    max-width: 90%;
+    padding: 24px;
   }
 }

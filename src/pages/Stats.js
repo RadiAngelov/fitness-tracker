@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer
+  LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,ResponsiveContainer
 } from 'recharts';
 import styles from '../pages/Stats.module.css';
 import GoalEditor from '../components/GoalEditor';
+import {
+  BarChart2,LineChartIcon,Search,Clock,Activity,Flame,Sun,Zap,Target,Calendar,CheckCircle
+} from 'lucide-react';
 
-const Stats = ({ user }) => {
+
+const Stats = ({ user, setUser }) => {
   const [workouts, setWorkouts] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [localUser, setLocalUser] = useState(user);
 
   useEffect(() => {
-    if (!user) return;
-
-    setLocalUser(user);
-
+    const storedUser = localStorage.getItem('user');
+    if (!storedUser) return;
+  
+    const parsedUser = JSON.parse(storedUser);
+    setLocalUser(parsedUser);
+  
     fetch("http://localhost:5001/workouts")
       .then(res => res.json())
       .then(data => {
         const filtered = data
-          .filter(workout => workout.userId === user.id)
-          .sort((a, b) => new Date(a.date) - new Date(b.date));
+          .filter(w => w.userId === parsedUser.id)
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
         setWorkouts(filtered);
       })
-      .catch(err => console.error("Грешка при зареждане на статистика:", err));
-  }, [user]);
+      .catch(err => console.error("Грешка при зареждане на тренировките:", err));
+  }, [user]); 
 
   if (!workouts || workouts.length === 0) {
-    return <h2 className={styles.container}>📊 Няма налични тренировки за статистика.</h2>;
+    return <h2 className={styles.container}><BarChart2 size={24} className={styles.icon} /> Няма налични тренировки за статистика.</h2>;
   }
 
   const filteredWorkouts = selectedMonth === null
@@ -83,7 +83,7 @@ const Stats = ({ user }) => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>📊 Статистики</h1>
+      <h1 className={styles.title}><BarChart2 size={24} className={styles.icon} /> Статистики</h1>
 
       {/* Филтър по месец */}
       <div className={styles.summary}>
@@ -113,7 +113,7 @@ const Stats = ({ user }) => {
       </div>
 
       {filteredWorkouts.length === 0 ? (
-        <p className={styles.warning}>📅 Няма тренировки за избрания месец.</p>
+        <p className={styles.warning}><Calendar size={24} className={styles.icon}/> Няма тренировки за избрания месец.</p>
       ) : (
         <>
           <div className={styles.summary}>
@@ -128,13 +128,16 @@ const Stats = ({ user }) => {
             <p>Най-често срещана интензивност: <strong>{intensityLabel}</strong></p>
           </div>
 
-          {/* 🎯 Месечна цел и прогрес */}
+          {/*  Месечна цел и прогрес */}
           <div className={styles.summary}>
             <GoalEditor
               user={localUser}
-              onGoalUpdate={(updatedGoal) =>
-                setLocalUser({ ...localUser, goal: updatedGoal })
-              }
+              onGoalUpdate={(updatedGoal) => {
+                const updatedUser = { ...localUser, goal: updatedGoal };
+                setLocalUser(updatedUser);
+                setUser(updatedUser);
+                localStorage.setItem("user", JSON.stringify(updatedUser));             
+              }}
             />
             <div className={styles.progressBar}>
               <div
@@ -145,25 +148,25 @@ const Stats = ({ user }) => {
             <p>{monthlyProgress.toFixed(1)}% изпълнение</p>
             {rawProgress > 100 && (
               <p className={styles.success}>
-                ✅ Целта е изпълнена! С {Math.floor(rawProgress - 100)}% над нея!
+                <CheckCircle size={16} className={styles.icon} /> Целта е изпълнена! С {Math.floor(rawProgress - 100)}% над нея!
               </p>
             )}
           </div>
 
-          <h2 className={styles.subtitle}>🔍 Топ 3 Тренировки</h2>
+          <h2 className={styles.subtitle}><Search size={20} className={styles.icon} /> Топ 3 Тренировки</h2>
           <div className={styles.summary}>
-            <p>⏳ Най-дълга по време: <strong>{longestByTime.duration} мин</strong> на {longestByTime.date}</p>
-            <p>🚴 Най-дълга по разстояние: <strong>{longestByDistance.distance} км</strong> на {longestByDistance.date}</p>
-            <p>💪 Най-интензивна: <strong>{intensityLabel}</strong> на {mostIntenseWorkout?.date}</p>
+            <p><Clock size={16} className={styles.icon} /> Най-дълга по време: <strong>{longestByTime.duration} мин</strong> на {longestByTime.date}</p>
+            <p><Activity size={16} className={styles.icon} /> Най-дълга по разстояние: <strong>{longestByDistance.distance} км</strong> на {longestByDistance.date}</p>
+            <p><Flame size={16} className={styles.icon} /> Най-интензивна: <strong>{intensityLabel}</strong> на {mostIntenseWorkout?.date}</p>
           </div>
 
           <div className={styles.legend}>
-            <span><span className={styles.lightDot}></span> Лека</span>
-            <span><span className={styles.mediumDot}></span> Средна</span>
-            <span><span className={styles.extremeDot}></span> Екстремна</span>
+            <span><Sun size={14} className={styles.icon} /> Лека</span>
+            <span><Zap size={14} className={styles.icon} /> Средна</span>
+            <span><Flame size={14} className={styles.icon} /> Екстремна</span>
           </div>
 
-          <h2 className={styles.subtitle}>📈 Напредък във времето</h2>
+          <h2 className={styles.subtitle}><LineChartIcon size={20} className={styles.icon} /> Напредък във времето</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />

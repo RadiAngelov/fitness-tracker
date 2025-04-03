@@ -54,7 +54,7 @@
   color: #28a745;
 }
 
-/* Delete бутона в WorkoutForm */
+
 .delete-btn {
   background-color: #e63946;
   color: white;
@@ -80,6 +80,22 @@
     transform: translateY(0);
   }
 }
+
+
+.icon {
+  vertical-align: middle;
+  margin-right: 6px;
+  color: #388e3c;
+}
+
+.comment {
+  font-style: italic;
+  color: #555;
+  margin-top: 6px;
+  display: block;
+  text-align: center;
+}
+
 
 @media (max-width: 768px) {
   .workouts-container {

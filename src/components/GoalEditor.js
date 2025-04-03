@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './GoalEditor.module.css';
+import {Target} from 'lucide-react';
+
 
 const GoalEditor = ({ user, onGoalUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -22,7 +24,7 @@ const GoalEditor = ({ user, onGoalUpdate }) => {
     });
 
     if (res.ok) {
-      onGoalUpdate(updatedGoal); // казваме на Stats.js да обнови локално потребителя
+      onGoalUpdate(updatedGoal);
       setIsEditing(false);
     } else {
       alert('Грешка при запазване на новата цел.');
@@ -33,7 +35,7 @@ const GoalEditor = ({ user, onGoalUpdate }) => {
 
   return (
     <div className={styles.goalEditor}>
-      <h3>🎯 Месечна цел</h3>
+      <h3><Target size={24} className={styles.icon}/> Месечна цел</h3>
       {isEditing ? (
         <>
           <label>Нова цел (в км):</label>

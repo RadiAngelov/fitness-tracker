@@ -86,10 +86,27 @@
     background-color: #eeeeee;
   }
   
-  /* Responsive */
+  
+  .icon {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    color: #388e3c;
+  }
+
+  .welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    text-align: center;
+    color: #2e7d32;
+  }  
+
+  
   @media (max-width: 768px) {
     .features {
       grid-template-columns: 1fr;
     }
   }
-  

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import WorkoutForm from '../components/WorkoutForm';
 import styles from '../pages/Workouts.module.css';
+import {
+  Calendar,Activity,Clock,Flame,Sun,Zap,Edit3,MessageSquare,Dumbbell
+} from 'lucide-react';
+
 
 const Workouts = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -63,7 +67,7 @@ const Workouts = () => {
       },
       body: JSON.stringify({
         ...updatedWorkout,
-        userId: user.id // 🔥 Запазваме userId при редакция
+        userId: user.id
       })
     })
       .then(res => res.json())
@@ -88,7 +92,7 @@ const Workouts = () => {
 
   return (
     <div className={styles["workouts-container"]}>
-      <h1>🚴 Моите тренировки</h1>
+      <h1><Dumbbell size={24} className={styles.icon} /> Моите тренировки</h1>
 
       <WorkoutForm
         onAddWorkout={addWorkout}
@@ -105,13 +109,26 @@ const Workouts = () => {
             className={`${styles["workout-item"]} ${selectedWorkout?.id === workout.id ? styles["selected"] : ''}`}
             onClick={() => setSelectedWorkout(workout)}
           >
-            <span>📅 {workout.date}</span>
-            <span>🚴 {workout.distance} км</span>
-            <span>⏳ {workout.duration} мин</span>
-            <span>💪 {convertIntensity(workout.intensity)}</span>
+            <span><Calendar size={16} className={styles.icon} /> {workout.date}</span>
+            <span><Activity size={16} className={styles.icon} /> {workout.distance} км</span>
+            <span><Clock size={16} className={styles.icon} /> {workout.duration} мин</span>
+            <span className={styles.icon}>
+              {workout.intensity === 'light' && <Sun size={16} className={styles.icon} />}
+              {workout.intensity === 'medium' && <Zap size={16} className={styles.icon} />}
+              {workout.intensity === 'extreme' && <Flame size={16} className={styles.icon} />}
+              {convertIntensity(workout.intensity)}
+            </span>
             {selectedWorkout?.id === workout.id && (
-              <span className={styles["edit-icon"]}>✏️</span>
+              <span className={styles["edit-icon"]}>
+              <Edit3 size={16} />
+              </span>
             )}
+            {workout.comments && (
+  <span className={styles.comment}>
+    <MessageSquare size={16} className={styles.icon} />
+    {workout.comments}
+  </span>
+)}
           </li>
         ))}
       </ul>

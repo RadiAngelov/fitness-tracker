@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../pages/Login.module.css';
 
+
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +21,7 @@ const Login = ({ setUser }) => {
       if (foundUser) {
         setUser(foundUser);
         localStorage.setItem("user", JSON.stringify(foundUser));
-        navigate("/workouts");
+        navigate("/");
       } else {
         setError("Невалиден имейл или парола.");
       }
