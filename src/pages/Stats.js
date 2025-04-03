@@ -5,7 +5,7 @@ import {
 import styles from '../pages/Stats.module.css';
 import GoalEditor from '../components/GoalEditor';
 import {
-  BarChart2, LineChartIcon, Search, Clock, Activity, Flame, Sun, Zap, Target, Calendar, CheckCircle
+  BarChart2, LineChartIcon, Search, Clock, Activity, Flame, Sun, Zap, Calendar, CheckCircle
 } from 'lucide-react';
 
 
